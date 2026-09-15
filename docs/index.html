@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Omarchy no Mark: fork local, agente em casa</title>
+<meta name="description" content="Vitrine do fork LucasOl1337/omarchy que roda neste PC. Arch, Hyprland, Quickshell, 373 comandos, 22 temas, 11 agentes. Não é o site oficial da distro.">
+<meta property="og:title" content="Omarchy no Mark: fork local">
+<meta property="og:description" content="O desktop agentic que este PC roda. Não é omarchy.org.">
+<meta property="og:image" content="media/poster.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="media/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#1a1b26;--sf:#16161e;--sf2:#1f2335;--sf3:#24283b;--bd:#292e42;--bds:#414868;
+  --ink:#c0caf5;--ink2:#a9b1d6;--ink3:#565f89;--acc:#7aa2f7;--acch:#7da6ff;--acct:#7aa2f7;
+  --green:#9ece6a;--red:#f7768e;--max:1120px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",Inter,system-ui,sans-serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+code,.mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
+.brand{display:flex;align-items:center;gap:12px;font-weight:600;letter-spacing:.18em;font-size:13px;color:var(--ink)}
+.brand img{width:32px;height:32px;border-radius:8px}
+.nav .links{display:flex;gap:22px;font-size:14px}
+.nav .links a{color:var(--ink3)}.nav .links a:hover{color:var(--ink);text-decoration:none}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:12px;font-weight:600;font-size:15px;border:1px solid transparent;transition:.15s}
+.btn.acc{background:var(--acc);color:#1a1b26}.btn.acc:hover{background:var(--acch);text-decoration:none}
+.btn.ghost{border-color:var(--bds);color:var(--ink2)}.btn.ghost:hover{background:var(--sf2);text-decoration:none;color:var(--ink)}
+.hero{padding:70px 0 40px;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.k{font-size:13px;letter-spacing:.26em;font-weight:600;color:var(--acc);text-transform:uppercase;margin:0 0 18px}
+h1{font-size:clamp(40px,5.6vw,68px);line-height:1.05;letter-spacing:-.025em;margin:0 0 22px;font-weight:700}
+h1 b{color:var(--acc);font-weight:700}
+.lead{font-size:20px;color:var(--ink2);max-width:540px;margin:0 0 30px}
+.cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.cta small{color:var(--ink3);font-size:13px;width:100%;margin-top:4px}
+.video{position:relative;border-radius:16px;overflow:hidden;background:#000;border:1px solid var(--bd);box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.video video{display:block;width:100%;height:auto}
+.vcap{color:var(--ink3);font-size:13.5px;margin:10px 0 0}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:56px 0 0}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:26px 26px 24px}
+.card h3{margin:14px 0 8px;font-size:20px;letter-spacing:-.01em}
+.card p{margin:0;color:var(--ink3);font-size:15.5px}
+.dot{width:12px;height:12px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 8px rgba(122,162,247,.14)}
+section{padding:84px 0 0}
+h2{font-size:clamp(30px,4vw,44px);line-height:1.08;letter-spacing:-.02em;margin:0 0 14px;font-weight:700}
+.sub{color:var(--ink3);font-size:18px;max-width:640px;margin:0 0 34px}
+.feat{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;margin-top:40px}
+.feat.rev .shot{order:-1}
+.feat h3{font-size:26px;letter-spacing:-.015em;margin:0 0 10px}
+.feat p{color:var(--ink2);margin:0 0 12px}
+.feat ul{margin:12px 0 0;padding-left:18px;color:var(--ink2)}
+.feat li{margin:6px 0}
+.shot{border-radius:14px;overflow:hidden;border:1px solid var(--bd);background:var(--sf);box-shadow:0 24px 60px rgba(0,0,0,.4)}
+.shot img{display:block;width:100%;height:auto}
+.src{color:var(--ink3);font-size:13px;margin-top:8px}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:36px}
+.step{background:var(--sf);border:1px solid var(--bd);border-radius:14px;padding:22px}
+.step .n{font-family:"IBM Plex Mono",monospace;color:var(--acc);font-size:13px;margin-bottom:10px}
+.step h4{margin:0 0 6px;font-size:17px}.step p{margin:0;color:var(--ink3);font-size:14.5px}
+.nums{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:36px}
+.num{background:var(--sf2);border-radius:14px;padding:22px}
+.num b{display:block;font-size:34px;letter-spacing:-.02em;font-weight:700}
+.num span{color:var(--ink3);font-size:14px}
+table{width:100%;border-collapse:collapse;margin-top:34px;background:var(--sf);border:1px solid var(--bd);border-radius:16px;overflow:hidden}
+th,td{padding:15px 18px;text-align:left;border-bottom:1px solid var(--bd);font-size:15.5px;vertical-align:top}
+th{color:var(--ink3);font-weight:600;font-size:13px;letter-spacing:.14em;text-transform:uppercase;background:var(--sf2)}
+tr:last-child td{border-bottom:0}
+td.y{color:var(--green)}td.n{color:var(--ink3)}
+td:first-child{color:var(--ink2);width:28%}
+.foot-note{color:var(--ink3);font-size:13.5px;margin-top:12px}
+pre{background:var(--sf);border:1px solid var(--bd);border-radius:14px;padding:20px 22px;overflow:auto;font-size:14px;line-height:1.6;color:var(--ink2);margin:0}
+pre .c{color:var(--ink3)}pre .a{color:var(--acc)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:30px}
+.two h4{margin:0 0 10px;font-size:14px;letter-spacing:.16em;color:var(--ink3);text-transform:uppercase}
+.notice{background:var(--sf2);border:1px solid var(--bd);border-radius:14px;padding:18px 20px;color:var(--ink2);font-size:15px;margin:24px 0 0}
+footer{margin-top:96px;padding:40px 0 60px;border-top:1px solid var(--bd);color:var(--ink3);font-size:14px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;padding-top:36px}
+  .pillars,.flow,.nums,.two{grid-template-columns:1fr 1fr}
+  .feat{grid-template-columns:1fr}.feat.rev .shot{order:0}
+  .nav .links{display:none}
+}
+@media (max-width:560px){.pillars,.flow,.nums,.two{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="nav">
+    <a class="brand" href="#"><img src="media/logo.png" alt="">OMARCHY</a>
+    <div class="links">
+      <a href="#como">Como funciona</a>
+      <a href="#telas">Telas</a>
+      <a href="#numeros">Números</a>
+      <a href="#compare">Comparar</a>
+      <a href="#instalar">Código</a>
+      <a href="https://github.com/LucasOl1337/omarchy">GitHub ↗</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div>
+      <p class="k">Fork local · Mark · não é omarchy.org</p>
+      <h1>Linux bonito,<br>divertido e <b>feito pra agente</b>.</h1>
+      <p class="lead">Esta página mostra o Omarchy que roda neste PC: o fork <span class="mono">LucasOl1337/omarchy</span>, Arch + Hyprland + Quickshell, com o Grok como agente padrão. Não é o site oficial da distro.</p>
+      <div class="cta">
+        <a class="btn acc" href="https://github.com/LucasOl1337/omarchy">Ver o código</a>
+        <a class="btn ghost" href="https://omarchy.org">Site oficial ↗</a>
+        <small>Gravado em 15 de setembro de 2026 a partir de uma instância de demo isolada. MIT. Commit <span class="mono">eb56446c</span>.</small>
+      </div>
+    </div>
+    <div>
+      <div class="video">
+        <video controls playsinline preload="metadata" poster="media/poster.jpg">
+          <source src="media/omarchy-promo-web.mp4" type="video/mp4">
+        </video>
+      </div>
+      <p class="vcap">Narração: Lucas Oliveira, OFICIAL #1 · OmniVoice local · watermark invisível desligado</p>
+    </div>
+  </header>
+
+  <div class="pillars">
+    <div class="card"><div class="dot"></div><h3>Agente em casa</h3><p>11 launchers no menu. Neste PC o padrão é o Grok. Crash vira diagnóstico. O uso aparece na barra.</p></div>
+    <div class="card"><div class="dot"></div><h3>Tudo no teclado</h3><p>373 rotas visíveis no command center. Menu, tema, plugin e agente. Super + Space abre o resto.</p></div>
+    <div class="card"><div class="dot"></div><h3>Um tema pinta tudo</h3><p>22 temas no pacote. Um comando acerta terminal, barra, notificação e wallpaper.</p></div>
+  </div>
+
+  <section id="como">
+    <h2>Como funciona neste PC</h2>
+    <p class="sub">Não é um app. É o desktop. A vitrine gravou o CLI real do fork, numa bancada isolada, sem tocar na sessão humana.</p>
+    <div class="flow">
+      <div class="step"><div class="n">01</div><h4>A distro</h4><p>ISO oficial do Omarchy instala Arch, Hyprland e Quickshell. Este repo é o <span class="mono">$OMARCHY_PATH</span> do Mark.</p></div>
+      <div class="step"><div class="n">02</div><h4>O command center</h4><p><span class="mono">omarchy</span> no terminal. Grupos, ajuda, JSON. 373 rotas visíveis neste commit.</p></div>
+      <div class="step"><div class="n">03</div><h4>O agente padrão</h4><p><span class="mono">omarchy default agent</span> devolve <span class="mono">grok</span>. Super+Shift+Ctrl+A lança. Crash abre o diagnose-crash.</p></div>
+      <div class="step"><div class="n">04</div><h4>O tema</h4><p><span class="mono">omarchy theme set</span> pinta o sistema. <span class="mono">omarchy-dev-theme-preview</span> mostra a paleta no terminal, ao vivo.</p></div>
+    </div>
+  </section>
+
+  <section id="telas">
+    <h2>O que foi gravado</h2>
+    <p class="sub">Quatro telas da instância de demo, 15 de setembro de 2026. Nada simulado na edição.</p>
+
+    <div class="feat">
+      <div>
+        <h3>Identidade deste fork</h3>
+        <p>Versão <span class="mono">dev (eb56446c)</span>, canal <span class="mono">dev</span>, tema atual Matte Black, agente padrão grok. Hostname do sistema é <span class="mono">lol</span>; Mark é o nome da máquina.</p>
+        <p class="src">Fonte: <span class="mono">omarchy version</span>, <span class="mono">omarchy default agent</span>, <span class="mono">omarchy theme current</span>, <span class="mono">omarchy-channel-current</span> na demo isolada.</p>
+      </div>
+      <div class="shot"><img src="media/screen-about.png" alt="Terminal da demo mostrando versão, agente padrão grok e tema Matte Black"></div>
+    </div>
+
+    <div class="feat rev">
+      <div>
+        <h3>Command center</h3>
+        <p>O roteador <span class="mono">omarchy</span> lista as rotas visíveis em JSON. Neste commit: 373 comandos, 69 grupos. Theme, agent, menu, update, screenshot.</p>
+        <p class="src">Fonte: <span class="mono">omarchy commands --json</span> em 15/09/2026, HEAD <span class="mono">eb56446c</span>. Contagem dos grupos: seção Groups de <span class="mono">omarchy</span>.</p>
+      </div>
+      <div class="shot"><img src="media/screen-cli.png" alt="omarchy commands --json devolvendo 373 rotas visíveis e 69 grupos"></div>
+    </div>
+
+    <div class="feat">
+      <div>
+        <h3>22 temas no pacote</h3>
+        <p><span class="mono">omarchy-dev-theme-preview</span> aplica a paleta no terminal via OSC. Tokyo Night, Matte Black, Gruvbox, Kanagawa, Rose Pine, Catppuccin. Um <span class="mono">omarchy theme set</span> pinta o desktop inteiro.</p>
+        <p class="src">Fonte: diretório <span class="mono">themes/</span> deste repo (22 temas). A lista da máquina inclui também Aether, tema de usuário em <span class="mono">~/.config/omarchy/themes</span>.</p>
+      </div>
+      <div class="shot"><img src="media/screen-themes.png" alt="Preview ao vivo da paleta de um tema Omarchy no terminal"></div>
+    </div>
+
+    <div class="feat rev">
+      <div>
+        <h3>11 agentes, padrão Grok</h3>
+        <p>Claude, Codex, OpenCode, Antigravity, Copilot, Crush, Grok, Pi, Oh My Pi, Ori e Hermes. Neste PC o default é grok. Crash vira <span class="mono">omarchy agent crash</span>. O painel da barra atualiza o uso a cada 15 minutos.</p>
+        <p class="src">Fonte: tabela em <span class="mono">manual/17-ai.md</span>; <span class="mono">omarchy default agent</span> = grok; help de <span class="mono">omarchy agent</span>.</p>
+      </div>
+      <div class="shot"><img src="media/screen-agents.png" alt="Lista dos 11 launchers de agente com grok marcado como padrão"></div>
+    </div>
+  </section>
+
+  <section id="numeros">
+    <h2>Números medidos</h2>
+    <p class="sub">Tudo lido deste checkout em 15 de setembro de 2026. Sem arredondar pra marketing.</p>
+    <div class="nums">
+      <div class="num"><b>373</b><span>rotas visíveis em <span class="mono">omarchy commands --json</span></span></div>
+      <div class="num"><b>69</b><span>grupos no command center</span></div>
+      <div class="num"><b>22</b><span>temas empacotados em <span class="mono">themes/</span></span></div>
+      <div class="num"><b>11</b><span>launchers de agente em <span class="mono">manual/17-ai.md</span></span></div>
+    </div>
+    <p class="foot-note">Versão do arquivo <span class="mono">version</span>: 4.0.0.alpha. <span class="mono">omarchy version</span> neste tree: dev (eb56446c). Licença MIT, copyright David Heinemeier Hansson. Fonte da narração: perfil OmniVoice <span class="mono">04b04ba5</span> (Lucas Oliveira, OFICIAL #1), watermark invisível off.</p>
+  </section>
+
+  <section id="compare">
+    <h2>O que isto é (e o que não é)</h2>
+    <p class="sub">Comparação datada. Este fork acompanha a linhagem quattro; não substitui o site nem a ISO oficiais.</p>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Este fork no Mark</th>
+          <th>Omarchy oficial</th>
+          <th>Arch vanilla</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>O que é</td>
+          <td class="y">Checkout <span class="mono">LucasOl1337/omarchy</span> rodando como <span class="mono">$OMARCHY_PATH</span></td>
+          <td>Distro Arch + Hyprland + Quickshell, “beautiful, fun &amp; agentic Linux by DHH”</td>
+          <td class="n">Base rolling-release, você monta o resto</td>
+        </tr>
+        <tr>
+          <td>ISO</td>
+          <td class="n">Este repo não publica ISO</td>
+          <td class="y">Omarchy 4.0.3 em iso.omarchy.org</td>
+          <td>archiso</td>
+        </tr>
+        <tr>
+          <td>Agente padrão</td>
+          <td class="y">grok neste PC</td>
+          <td>o usuário escolhe no first boot</td>
+          <td class="n">nenhum</td>
+        </tr>
+        <tr>
+          <td>Launchers de agente</td>
+          <td class="y">11, tabela do manual</td>
+          <td class="y">os mesmos, mais apps no menu Install &gt; AI</td>
+          <td class="n">você instala na mão</td>
+        </tr>
+        <tr>
+          <td>Crash → agente</td>
+          <td class="y"><span class="mono">omarchy agent crash</span> + skill diagnose-crash</td>
+          <td class="y">“Make sense of a crash” em omarchy.org</td>
+          <td class="n"><span class="mono">coredumpctl</span> na mão</td>
+        </tr>
+        <tr>
+          <td>Temas no pacote</td>
+          <td class="y">22 em <span class="mono">themes/</span></td>
+          <td class="y">22 listados no site em 15/09/2026</td>
+          <td class="n">DIY</td>
+        </tr>
+        <tr>
+          <td>Command center</td>
+          <td class="y">373 rotas visíveis neste commit</td>
+          <td>mesma linhagem quattro</td>
+          <td class="n">pacman + wiki</td>
+        </tr>
+        <tr>
+          <td>Licença</td>
+          <td>MIT</td>
+          <td>MIT</td>
+          <td>mistura (kernel GPL)</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="foot-note">
+      Fontes em 15/09/2026:
+      <a href="https://omarchy.org">omarchy.org</a> (ISO 4.0.3, temas, crash, first-boot do agente);
+      <a href="https://github.com/omacom/omarchy">github.com/omacom/omarchy</a> (41.066 stars no próprio site);
+      <a href="https://archlinux.org">archlinux.org</a>;
+      este checkout <span class="mono">eb56446c</span> e <span class="mono">manual/17-ai.md</span>.
+      O site oficial lista também Muse na faixa de agentes; o manual deste tree tabela 11 launchers de CLI.
+    </p>
+  </section>
+
+  <section id="instalar">
+    <h2>Código, não instalador</h2>
+    <p class="sub">O botão da página aponta pro repositório. Não tem release binária porque isto não é um app pra baixar: é o tree do desktop.</p>
+    <div class="two">
+      <div>
+        <h4>Este fork</h4>
+        <pre><span class="c"># o $OMARCHY_PATH do Mark</span>
+git clone https://github.com/LucasOl1337/omarchy.git</pre>
+      </div>
+      <div>
+        <h4>A distro (oficial)</h4>
+        <pre><span class="c"># ISO 4.0.3, omarchy.org em 15/09/2026</span>
+<span class="a">https://iso.omarchy.org/omarchy-4.0.3.iso</span></pre>
+      </div>
+    </div>
+    <div class="notice">
+      Instalação da distro continua sendo a ISO oficial: USB, cinco perguntas, disco criptografado por padrão. Manual em <span class="mono">manual/02-getting-started.md</span>. Este PR não liga GitHub Pages nem promove produção.
+    </div>
+  </section>
+
+  <footer>
+    <div>
+      Fork <a href="https://github.com/LucasOl1337/omarchy">LucasOl1337/omarchy</a> · MIT · original por David Heinemeier Hansson.<br>
+      Vitrine gravada em 15 de setembro de 2026. Não é <a href="https://omarchy.org">omarchy.org</a>.
+    </div>
+    <div>Narração OmniVoice · perfil 04b04ba5 · invisível off</div>
+  </footer>
+</div>
+</body>
+</html>
