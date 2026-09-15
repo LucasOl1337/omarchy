@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "omarchy.agents",
   "name": "Agents",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "author": "Omarchy",
   "license": "MIT",
   "description": "Agent usage with period filters, project totals, live local activity, and collectors for Grok, Cursor, OpenCode, and Devin.",
@@ -13,7 +13,7 @@
   },
   "barWidget": {
     "displayName": "Agents",
-    "description": "One bar icon and one panel: rate-limit meters, tokens by day and by model, an All tab that sums every harness, and day/week/month/total filters.",
+    "description": "One bar icon and one panel: rate-limit meters, tokens by hour, day and model, an All tab that sums every harness, and hour/day/week/month/total filters.",
     "category": "AI",
     "aliases": ["agents", "model-usage"],
     "allowMultiple": false,

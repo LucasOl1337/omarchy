@@ -18,7 +18,7 @@ cross-device aggregation); `Agent.qml` is the per-record file watcher.
 - **Balance** — prepaid agents report a credit ledger instead of limits:
   remaining credit, a fuel-gauge meter that drains toward empty, and
   funded-versus-spent detail.
-- **Period** — Day, Week, Month, or Total. Week is the default (last seven days). Total keeps the all-time model breakdown and does not reset with a quota window. `1`/`d`, `2`/`w`, `3`/`m`, `4`/`t` switch the filter.
+- **Period** — Hour, Day, Week, Month, or Total. Hour buckets the last 24 hours out of the local tracking ledger's per-event timestamps, so it covers the agents with local session files; the usage records themselves only carry per-day totals. Week is the default (last seven days). Total keeps the all-time model breakdown and does not reset with a quota window. `h`, `1`/`d`, `2`/`w`, `3`/`m`, `4`/`t` switch the filter.
 - **Tokens by day** — one row per day in the selected period: day, bar, tokens, with today
   bolded at the bottom. Hover today for its prompt and session count. Hidden on Total, and on a harness that has no token history for the window.
 - **Tokens by model** — tokens per model with the bar behind each row scaled
