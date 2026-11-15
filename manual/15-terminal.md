@@ -18,22 +18,22 @@ Omarchy ships with an ergonomically-optimized Tmux configuration, which has a lo
 
 Because Tmux is programmable, we can use functions to create layouts. Omarchy ships with four different functions for common developer layouts.
 
-`tdl [agent]` starts a three-way split IDE-like interface with the `$EDITOR` on the left, your chosen AI agent on the right (like `c` for opencode or `cx` for Claude or `codex` for OpenAI), and then a terminal at the bottom.
+`tdl [agent]` starts a three-way split IDE-like interface with the `$EDITOR` on the left, your chosen AI agent on the right (like `cx` for Claude or `codex` for OpenAI), and then a terminal at the bottom.
 
-So `tdl c` would start this (or just `ic`):
+For example, `tdl cx` starts this layout:
 
  ![tmux-tdl](images/tmux-tdl.webp)
 
-You can also start a second agent with `tdl c cx` (opencode + claude) (or just `icx`):
+You can also start a second agent with `tdl codex cx` (Codex + Claude):
 
  ![tmux-tdl2](images/tmux-tdl2.webp)
 
-There's also `tds`, which starts a four-way square with the editor top left, a live diff watcher top right, a terminal bottom left, and opencode bottom right.
+There's also `tds`, which starts a four-way square with the editor top left, a live diff watcher top right, a terminal bottom left, and a spare terminal bottom right.
 
 You can also start this layout configuration for every subdirectory in the current directory using `tdlm [agent]`, then navigate using `alt + 1/2/3/4/5/...`:
 
  ![tmux-tdlm](images/tmux-tdlm.webp)
 
-Finally, you can start a swarm of agents using `tsl [panes] [command]`. So `tsl 4 c` will give you a four-way grid of opencode agents:
+Finally, you can start a swarm of agents using `tsl [panes] [command]`. So `tsl 4 cx` will give you a four-way grid of Claude agents:
 
  ![tmux-tsl](images/tmux-tsl.webp)

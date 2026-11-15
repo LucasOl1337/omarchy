@@ -47,14 +47,14 @@ hdl() {
   herdr pane run "$editor_pane" "$EDITOR ." >/dev/null
 }
 
-# Create a Herdr Dev Square layout with editor, diff watch, terminal, and opencode
+# Create a Herdr Dev Square layout with editor, diff watch, terminal, and a spare terminal
 # Usage: hds
 hds() {
   [[ -n $1 ]] && { echo "Usage: hds"; return 1; }
   [[ -z $HERDR_PANE_ID ]] && { echo "You must start herdr to use hds."; return 1; }
 
   local current_dir="${PWD}"
-  local editor_pane diff_pane terminal_pane opencode_pane
+  local editor_pane diff_pane terminal_pane spare_pane
 
   editor_pane="$HERDR_PANE_ID"
 
@@ -62,11 +62,10 @@ hds() {
 
   terminal_pane=$(_herdr_split "$editor_pane" down 0.5 "$current_dir")
   diff_pane=$(_herdr_split "$editor_pane" right 0.5 "$current_dir")
-  opencode_pane=$(_herdr_split "$terminal_pane" right 0.5 "$current_dir")
+  spare_pane=$(_herdr_split "$terminal_pane" right 0.5 "$current_dir")
 
   herdr pane run "$editor_pane" "nvim ." >/dev/null
   herdr pane run "$diff_pane" "hunk diff --watch" >/dev/null
-  herdr pane run "$opencode_pane" "opencode" >/dev/null
 }
 
 # Create multiple hdl tabs with one per subdirectory in the current directory

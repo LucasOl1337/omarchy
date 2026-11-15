@@ -54,9 +54,9 @@ fi
 # Agents launched from the keybinding or menu run unattended, so each one starts
 # with its own spelling of "don't stop to ask". Pi and Ori have none to skip.
 case "$agent" in
-opencode)
-  command=(opencode --auto)
-  [[ -n ${prompt:-} ]] && command+=(--prompt "$prompt")
+opencode | omp)
+  echo "Cliente aposentado; escolha um agente ativo." >&2
+  exit 1
   ;;
 agy)
   command=(agy --dangerously-skip-permissions)
@@ -101,10 +101,6 @@ hermes)
   else
     command=(hermes --yolo)
   fi
-  ;;
-omp)
-  command=(omp --auto-approve)
-  [[ -n ${prompt:-} ]] && command+=(-- "$prompt")
   ;;
 ori)
   # Ori is a harness launcher, and `ori code` is the agent it runs itself.
