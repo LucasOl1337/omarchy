@@ -79,8 +79,8 @@ claude)
   [[ -n ${prompt:-} ]] && command+=(-- "$prompt")
   ;;
 grok)
-  command=(grok --permission-mode bypassPermissions)
-  [[ -n ${prompt:-} ]] && command+=(-- "$prompt")
+  echo "Grok is retired from this installation." >&2
+  exit 1
   ;;
 openclaw)
   # The launcher owns onboarding and the gateway dance: OpenClaw's terminal UI

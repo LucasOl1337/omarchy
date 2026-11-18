@@ -120,8 +120,8 @@ pass "custom agent lazy stubs preserve their mise packages"
 
 source "$ROOT/install/user/mise.sh"
 grep -Fx "$agy_package agy" "$stub_log" >/dev/null || fail "user setup creates the Antigravity lazy stub"
-grep -Fx "$grok_package grok" "$stub_log" >/dev/null || fail "user setup creates the Grok lazy stub"
-grep -Fx "$omp_package omp" "$stub_log" >/dev/null || fail "user setup creates the Oh My Pi lazy stub"
+if grep -Fx "$grok_package grok" "$stub_log" >/dev/null; then fail "user setup must not provision Grok"; fi
+if grep -Fx "$omp_package omp" "$stub_log" >/dev/null; then fail "user setup must not provision Oh My Pi"; fi
 grep -Fx "$crush_package" "$stub_log" >/dev/null || fail "user setup creates the Crush lazy stub"
 grep -Fx "$ori_package ori" "$stub_log" >/dev/null || fail "user setup creates the Ori lazy stub"
 pass "user setup creates the custom agent lazy stubs"
@@ -137,7 +137,7 @@ grep -Fx "$ori_package ori" "$stub_log" >/dev/null || fail "Ori migration create
 : >"$stub_log"
 source "$ROOT/migrations/1785846769.sh" >/dev/null
 grep -Fx "$omp_package omp" "$stub_log" >/dev/null || fail "agent migration repairs the Oh My Pi lazy stub"
-grep -Fx "$grok_package grok" "$stub_log" >/dev/null || fail "agent migration creates the Grok lazy stub"
+if grep -Fx "$grok_package grok" "$stub_log" >/dev/null; then fail "agent migration must not provision Grok"; fi
 grep -Fx "$crush_package" "$stub_log" >/dev/null || fail "agent migration creates the Crush lazy stub"
 
 : >"$stub_log"
@@ -299,7 +299,6 @@ declare -A expected_agents=(
   [claude-code]="claude"
   [codex]="codex"
   [crush]="crush"
-  [grok]="grok"
   [agy]="agy"
   [antigravity]="agy"
   [antigravity-cli]="agy"
@@ -317,7 +316,6 @@ declare -A expected_packages=(
   [claude]="claude"
   [codex]="codex"
   [crush]="$crush_package"
-  [grok]="$grok_package"
   [agy]="$agy_package"
   [copilot]="copilot"
 )
@@ -463,7 +461,6 @@ assert_launch ori ori code --interactive --prompt "Review this project"
 assert_launch claude claude --permission-mode auto -- "Review this project"
 assert_launch codex codex --approve-for-me -- "Review this project"
 assert_launch crush crush run "Review this project"
-assert_launch grok grok --permission-mode bypassPermissions -- "Review this project"
 assert_launch hermes env -u HERMES_SESSION_SOURCE hermes chat --yolo --tui "--query=Review this project"
 assert_launch agy agy --dangerously-skip-permissions --prompt-interactive "Review this project"
 assert_launch copilot copilot --allow-all --interactive "Review this project"
@@ -483,7 +480,6 @@ assert_bypass ori ori code
 assert_bypass claude claude --permission-mode auto
 assert_bypass codex codex --approve-for-me
 assert_bypass crush crush --yolo
-assert_bypass grok grok --permission-mode bypassPermissions
 assert_bypass hermes hermes --yolo
 assert_bypass agy agy --dangerously-skip-permissions
 assert_bypass copilot copilot --allow-all
